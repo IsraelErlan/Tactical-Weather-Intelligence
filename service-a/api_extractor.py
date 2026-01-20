@@ -1,9 +1,14 @@
+import os
+
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # --------- Helper: Geocoding ----------
 def fetch_coordinates(location_name: str):
-    url = "https://geocoding-api.open-meteo.com/v1/search"
+    url = os.getenv("GEOCODING_API")
     params = {
         "name": location_name,
         "count": 1
@@ -27,7 +32,7 @@ def fetch_coordinates(location_name: str):
 
 # --------- Helper: Weather ----------
 def fetch_hourly_weather(latitude: float, longitude: float):
-    url = "https://api.open-meteo.com/v1/forecast"
+    url = os.getenv("API_OPEN_METEO")
     params = {
         "latitude": latitude,
         "longitude": longitude,
@@ -71,14 +76,13 @@ def ingest_weather_for_locations(locations):
                 "temperature": temperatures[i],
                 "wind_speed": wind_speeds[i],
                 "humidity": humidities[i]
-
             }
             records.append(record)
 
     return records
 
 def send_data_to_server_b(data):
-    url = "http://localhost:8080/ttt"
+    url = os.getenv("SERVER_B_HOST")
     response = requests.post(url, json=data)
     response.raise_for_status()
     return response.json()
