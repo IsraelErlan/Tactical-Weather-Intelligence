@@ -3,10 +3,9 @@ import numpy as np
 
 
 class WeatherData:
-    
-    def __init__(self, weather_list: list):
+
+    def __init__(self, weather_list: list[dict]):
         self.df = pd.DataFrame(weather_list)
-        print(self.df.dtypes)
 
     @classmethod
     def create_and_run(cls, weather_list):
@@ -27,18 +26,15 @@ class WeatherData:
         self.df = self.df.dropna()
 
     def add_col_temperature_category(self):
-        self.df['temperature_category'] = pd.cut(self.df['temperature'], 
-                                            bins=[-np.inf, 18, 25, np.inf],
-                                            labels=['cold', 'moderate', 'hot'])
+        self.df['temperature_category'] = pd.cut(self.df['temperature'],
+                                                 bins=[-np.inf, 18, 25, np.inf],
+                                                 labels=['cold', 'moderate', 'hot'])
 
     def add_col_wind_status(self):
-        self.df['wind_status'] = pd.cut(self.df['wind_speed'], 
+        self.df['wind_status'] = pd.cut(self.df['wind_speed'],
                                         bins=[-np.inf, 10, np.inf],
                                         labels=['calm', 'windy'])
 
     def to_json(self):
-        data = self.df.to_dict( orient='records')
+        data = self.df.to_dict(orient='records')
         return data
-        
-        
-
