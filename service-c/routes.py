@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from sql_manager import SQLManager
 import mysql.connector
-def get_connection(): pass
+from connection_db import get_connection
+
 router = APIRouter()
 
 @router.get('/records/count')
