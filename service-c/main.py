@@ -4,6 +4,9 @@ from storage_db import save_weather_records
 from connection_db import init_connection_pool
 from init_db import init_database
 
+from routes import router
+
+
 app = FastAPI()
 
 @app.on_event("startup")
@@ -15,6 +18,10 @@ def startup_event():
 @app.post("/records")
 def save_to_db(data:list[dict]):
     return save_weather_records(data)
+
+
+app.include_router(router)
+=======
 
 
 

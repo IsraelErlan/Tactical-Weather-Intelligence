@@ -26,3 +26,4 @@ __pycache__
 .idea/
 .venv/
 
+.env
