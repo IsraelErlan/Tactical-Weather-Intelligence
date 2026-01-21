@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from api_request import send_data_to_server_c
+
 
 class WeatherData:
 
@@ -11,8 +11,7 @@ class WeatherData:
     def create_and_run(cls, weather_list):
         instance = cls(weather_list)
         data = instance.run_all()
-        return send_data_to_server_c(data)
-
+        return data
 
     def run_all(self):
         self.delete_duplicates()

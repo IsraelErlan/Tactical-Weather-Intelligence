@@ -30,7 +30,7 @@ def insert_data_to_db(records):
                 r["wind_speed"],
                 r["humidity"],
                 r["temperature_category"],
-                r["wind_category"]
+                r["wind_status"]
             )
             for r in records
         ]

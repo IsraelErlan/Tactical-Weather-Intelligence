@@ -2,8 +2,14 @@ from fastapi import APIRouter, HTTPException
 from sql_manager import SQLManager
 import mysql.connector
 from connection_db import get_connection
+from storage_db import save_weather_records
 
 router = APIRouter()
+
+@router.post("/records")
+def save_to_db(data:list[dict]):
+    return save_weather_records(data)
+
 
 @router.get('/records/count')
 def get_records(): 

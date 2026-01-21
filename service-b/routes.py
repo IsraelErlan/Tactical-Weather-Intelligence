@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from data_handler import WeatherData
+from api_request import send_data_to_server_c
 
 router = APIRouter()
 
@@ -8,7 +9,8 @@ router = APIRouter()
 def clean_data(weather_list: list[dict]):
     try:
         data = WeatherData.create_and_run(weather_list)
-        return data
+        res = send_data_to_server_c(data)
+        return res
     except HTTPException as e:
         raise HTTPException(status_code=e.status_code, detail=e.detail)
     except Exception as e:

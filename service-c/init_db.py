@@ -8,7 +8,12 @@ def init_database():
         password=os.getenv("PASSWORD")
     )
     cursor = conn.cursor()
-    sql_path = os.path.join("sql", "init.sql")
+    
+    base_path = os.path.dirname(__file__) 
+    sql_path = os.path.join(base_path, "init.sql")
+    
+    if not os.path.exists(sql_path):
+        raise FileNotFoundError(f"file {sql_path} not found")
     with open(sql_path, "r", encoding="utf-8") as f:
         sql_commands = f.read().split(";")
 
