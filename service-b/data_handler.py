@@ -1,11 +1,10 @@
 import pandas as pd
 import numpy as np
-import datetime
 
 
 class WeatherData:
 
-    def __init__(self, weather_list: list):
+    def __init__(self, weather_list: list[dict]):
         self.df = pd.DataFrame(weather_list)
 
     @classmethod
