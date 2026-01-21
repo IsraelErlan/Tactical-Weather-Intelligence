@@ -3,7 +3,7 @@ from fastapi import HTTPException
 
 def send_data_to_server_c(data: list):
     try:
-        requests.post(url='http://0.0.0.0/8001/records', jsom=data)
+        requests.post(url='http://localhost/8001/records', jsom=data)
     except HTTPException as e:
         raise HTTPException(status_code=e.status_code, detail=e.detail)
     except Exception as e:
