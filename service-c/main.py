@@ -5,19 +5,14 @@ from init_db import init_database
 
 from routes import router
 
-
 app = FastAPI()
+app.include_router(router)
 
 @app.on_event("startup")
 def startup_event():
     init_database()  # create database
     init_connection_pool()  # create reservoir  of connections
 
-
-
-
-
-app.include_router(router)
 
 
 
