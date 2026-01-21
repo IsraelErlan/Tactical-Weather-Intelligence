@@ -7,7 +7,6 @@ router = APIRouter()
 @router.post('/clean')
 def clean_data(weather_list: list[dict]):
     try:
-        WeatherData.create_and_run(weather_list)
         data = WeatherData.create_and_run(weather_list)
         return data
     except HTTPException as e:
