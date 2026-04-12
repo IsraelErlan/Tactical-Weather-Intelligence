@@ -1,9 +1,11 @@
 import os
 import mysql.connector
+from dotenv import load_dotenv
+load_dotenv()
 
 def init_database():
     conn = mysql.connector.connect(
-        host=os.getenv("HOST","localhost"),
+        host='127.0.0.1',
         user=os.getenv("USER"),
         password=os.getenv("PASSWORD")
     )

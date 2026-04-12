@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-c
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-c
+  template:
+    metadata:
+      labels:
+        app: service-c
+        tier: application
+    spec:
+      containers:
+      - name: service-c
+        image: roeyaverbuch/service-c:v1.2
+        ports:
+        - containerPort: 8001
+        env:
+        - name: SERVICE_HOST
+          value: "0.0.0.0"
+        - name: SQL_HOST
+          value: "mysql-0.mysql-svc"
+        - name: SQL_USER
+          value: "root"
+        - name: SQL_PASS
+          value: "123"
+        - name: DATABASE
+          value: "weather_records_db"

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+  template:
+    metadata:
+      labels:
+        app: service-a
+        tier: application
+    spec:
+      containers:
+      - name: service-a
+        image: roeyaverbuch/service-a:v1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SERVICE_B_URL
+          value: "http://service-b-svc:8000/clean"
+        - name: SERVICE_PORT
+          value: "8080"   
+        - name: SERVICE_HOST
+          value: "0.0.0.0"  
+        

@@ -11,7 +11,7 @@ def init_connection_pool():
         _connection_pool = mysql.connector.pooling.MySQLConnectionPool(
             pool_name="weather_pool",
             pool_size=5,
-            host=os.getenv("HOST"),
+            host='127.0.0.1',
             port=int(os.getenv("PORT", 3306)),
             user=os.getenv("USER"),
             password=os.getenv("PASSWORD"),
